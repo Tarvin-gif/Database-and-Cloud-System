@@ -1,0 +1,174 @@
+[
+    {
+        "id": "972061397f4d7961",
+        "type": "inject",
+        "z": "256bb9f9d492b91f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"temperature\": 25.5, \"sensor\": \"ESP32_01\"}",
+        "payloadType": "json",
+        "x": 310,
+        "y": 240,
+        "wires": [
+            [
+                "f9f4433122243679"
+            ]
+        ]
+    },
+    {
+        "id": "f9f4433122243679",
+        "type": "mqtt out",
+        "z": "256bb9f9d492b91f",
+        "name": "",
+        "topic": "campus/lab1/temperature",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "14ec3ec298ba60ff",
+        "x": 710,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "5e2b2f54197705c4",
+        "type": "inject",
+        "z": "256bb9f9d492b91f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"temperature\": 26.0}",
+        "payloadType": "json",
+        "x": 340,
+        "y": 340,
+        "wires": [
+            [
+                "afc910ee2341b02e"
+            ]
+        ]
+    },
+    {
+        "id": "afc910ee2341b02e",
+        "type": "mqtt out",
+        "z": "256bb9f9d492b91f",
+        "name": "",
+        "topic": "campus/lab2/temperature",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "14ec3ec298ba60ff",
+        "x": 710,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "99780df069cd4346",
+        "type": "inject",
+        "z": "256bb9f9d492b91f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"humidity\": \"89%\"}",
+        "payloadType": "json",
+        "x": 340,
+        "y": 440,
+        "wires": [
+            [
+                "30d44fb0db9dd0fb"
+            ]
+        ]
+    },
+    {
+        "id": "30d44fb0db9dd0fb",
+        "type": "mqtt out",
+        "z": "256bb9f9d492b91f",
+        "name": "",
+        "topic": "campus/lab1/humidity",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "14ec3ec298ba60ff",
+        "x": 700,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "14ec3ec298ba60ff",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "host.docker.internal",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
