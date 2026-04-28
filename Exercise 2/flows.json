@@ -1,0 +1,69 @@
+[
+    {
+        "id": "3c70e64faac32d40",
+        "type": "http in",
+        "z": "7e20fadc4dbdecc8",
+        "name": "Sensor Data",
+        "url": "/api/sensor",
+        "method": "post",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 1190,
+        "y": 380,
+        "wires": [
+            [
+                "7f069fd8a579b188",
+                "6a8bf178fee05d33"
+            ]
+        ]
+    },
+    {
+        "id": "7f069fd8a579b188",
+        "type": "function",
+        "z": "7e20fadc4dbdecc8",
+        "name": "function 1",
+        "func": "msg.payload = {\n    message: \"GET request received\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1420,
+        "y": 380,
+        "wires": [
+            [
+                "8287fdb1051b0934"
+            ]
+        ]
+    },
+    {
+        "id": "8287fdb1051b0934",
+        "type": "http response",
+        "z": "7e20fadc4dbdecc8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1610,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "6a8bf178fee05d33",
+        "type": "debug",
+        "z": "7e20fadc4dbdecc8",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1420,
+        "y": 440,
+        "wires": []
+    }
+]
