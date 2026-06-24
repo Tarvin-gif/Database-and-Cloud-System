@@ -1,0 +1,128 @@
+[
+    {
+        "id": "cae828e5c8e98f4e",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9fa296d3b3d1d38c",
+        "type": "inject",
+        "z": "cae828e5c8e98f4e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[]",
+        "payloadType": "json",
+        "x": 170,
+        "y": 200,
+        "wires": [
+            [
+                "49affd64b6f8b7e2"
+            ]
+        ]
+    },
+    {
+        "id": "49affd64b6f8b7e2",
+        "type": "function",
+        "z": "cae828e5c8e98f4e",
+        "name": "function 2",
+        "func": "// Define the 6-stage pipeline\nvar my_pipeline = [\n    { \"$match\": { \"temperature\": { \"$gt\": 30 } } },\n    { \"$project\": { \"_id\": 0, \"sensor_id\": 1, \"temperature\": 1 } },\n    { \"$group\": { \"_id\": \"$sensor_id\", \"avg_temp\": { \"$avg\": \"$temperature\" } } },\n    { \"$sort\": { \"avg_temp\": 1 } },\n    { \"$lookup\": { \"from\": \"device_metadata\", \"localField\": \"_id\", \"foreignField\": \"sensor_id\", \"as\": \"details\" } },\n    { \"$unwind\": { \"path\": \"$details\" } }\n];\n\n// Wrap the pipeline array inside another array for the mongodb4 node\nmsg.payload = [ my_pipeline ]; \n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 200,
+        "wires": [
+            [
+                "8777aa3cd9dc5a1b"
+            ]
+        ]
+    },
+    {
+        "id": "8777aa3cd9dc5a1b",
+        "type": "mongodb4",
+        "z": "cae828e5c8e98f4e",
+        "clientNode": "4a228a7818a32006",
+        "mode": "collection",
+        "collection": "environment_telemetry",
+        "operation": "aggregate",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 620,
+        "y": 200,
+        "wires": [
+            [
+                "d0339ef3892ece50"
+            ]
+        ]
+    },
+    {
+        "id": "d0339ef3892ece50",
+        "type": "debug",
+        "z": "cae828e5c8e98f4e",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "4a228a7818a32006",
+        "type": "mongodb4-client",
+        "name": "",
+        "protocol": "mongodb",
+        "hostname": "host.docker.internal",
+        "port": "27017",
+        "dbName": "smart_campus",
+        "appName": "",
+        "authSource": "",
+        "authMechanism": "DEFAULT",
+        "tls": false,
+        "tlsCAFile": "",
+        "tlsCertificateKeyFile": "",
+        "tlsInsecure": false,
+        "connectTimeoutMS": "30000",
+        "socketTimeoutMS": "0",
+        "minPoolSize": "0",
+        "maxPoolSize": "100",
+        "maxIdleTimeMS": "0",
+        "uri": "",
+        "advanced": "{}",
+        "uriTabActive": "tab-uri-simple"
+    },
+    {
+        "id": "c043b8d6566b01cf",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-mongodb4": "3.4.0"
+        }
+    }
+]
